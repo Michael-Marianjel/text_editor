@@ -27,7 +27,7 @@
 			<div draggable ="true" class="line_layout" id = "line_layout" ondragstart="dragstart_handler(event)" ondragend="dragend_handler(event);"></div>
 			<div class="template">
 				<h5 style="text-align: center;">Template List</h5>
-				<select class="form-control" id = "template_list"></select>
+				<select style="font-size: 15px;" class="form-control" onchange="require_template(this)" id = "template_list"></select>
 			</div>
 			<button class= "btn" style="background-color: lightgrey;position: absolute;top:88%;left:2%;width:95%;color:black;box-shadow: 1px 1px 1px;"  class="btn btn-primary" onclick="template_modal()">Template Save</button>
 			<button class="btn btn-info export_btn" onclick="printPDF('artboard')">Convert into PDF</button>
@@ -46,7 +46,7 @@
 			</button>
 
 			<input class="color_option" type="color" onblur="changeColor(this)" value="#ff0000">
-			<select onchange="changeSizeText(this)">
+			<select style="font-size: 15px;" onchange="changeSizeText(this)">
 				<option value="1">A1</option>
 				<option value="2">A2</option>
 				<option value="3">A3</option>
@@ -109,9 +109,10 @@
 			console.log(data)
 			$.ajax({
 				url:"./server/insert.php",
+				type:"post",
 				data:data,
 				success:function(req){
-					if(req.body = "Ok")
+					if(req == "Ok")
 					{
 						alert("New template was saved successfully")
 						$("#myModal").modal("hide")
@@ -122,12 +123,22 @@
 		$(document).ready(function(){
 			$.ajax({
 				url:"./server/get_template.php",
-				dataType:"JSON",
 				success:function(req){
-					console.log(req.body)
+					document.getElementById('template_list').innerHTML = req;
 				}
 			});
 		})
+		function require_template(that)
+		{
+			$.ajax({
+				url:"./server/require_template.php?id="+that.value,
+				type:'get',
+				success:function(req){
+					console.log(req)
+					document.getElementById('artboard').innerHTML = req;
+				}
+			});
+		}
 		// function template_use(){
 		// 	document.getElementById("artboard").innerHTML=template
 		// }

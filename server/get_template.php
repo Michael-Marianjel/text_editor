@@ -10,7 +10,7 @@
     while($row = $result->fetch_assoc()){
       if($i == 0 )
       {
-        $retval .= "<option >Choose the template</option>";
+        $retval .= "<option disabled selected>Choose the template</option>";
         $retval .= "<option value = '".$row['id']."'>".$row['template_name']."</option>";
         $i++;
       }
@@ -22,6 +22,6 @@
     echo $retval;
   }
   else {
-    $retval .= "<option >Choose the template</option>";
+    $retval .= "<option disabled selected>Choose the template</option>";
     echo $retval;
   }
