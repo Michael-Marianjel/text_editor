@@ -7,10 +7,18 @@
   height:1000px;
   border-style:none;
 }
+.template{
+  position: absolute;
+  top:45%;
+  left:2%;
+  width:95%;
+}
 .export_btn{
   position: absolute;
   top: 94%;
-  left: 3%;
+  left: 2%;
+  box-shadow: 1px 1px 1px!important;
+  width:96%;
 }
 .artboard-overlay{
   position: absolute;

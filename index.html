@@ -10,7 +10,11 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link rel="stylesheet" href="dest/css/style.css" />
 	<link rel="stylesheet" href="dest/css/custom.scss">
-	<script src="./js/jquery.min.js"></script>
+	<!-- <script src="./js/jquery.min.js"></script> -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 
 </head>
 <body>
@@ -21,8 +25,11 @@
 			<div draggable ="true" id = "row_layout" class="row_layout" ondragstart="dragstart_handler(event)" ondragend="dragend_handler(event);" contenteditable></div>
 			<div draggable ="true" id = "col_layout" class="col_layout" ondragstart="dragstart_handler(event)" ondragend="dragend_handler(event);" contenteditable></div>
 			<div draggable ="true" class="line_layout" id = "line_layout" ondragstart="dragstart_handler(event)" ondragend="dragend_handler(event);"></div>
-			<button class= "btn" style="background-color: lightgrey;position: absolute;top:82%;left:3%;width:93%;color:black;" onclick="templage_use()">Template Use</button>
-			<button class= "btn" style="background-color: lightgrey;position: absolute;top:88%;left:3%;width:93%;color:black;" onclick="templage_save()">Template Save</button>
+			<div class="template">
+				<h5 style="text-align: center;">Template List</h5>
+				<select class="form-control" id = "template_list"></select>
+			</div>
+			<button class= "btn" style="background-color: lightgrey;position: absolute;top:88%;left:2%;width:95%;color:black;box-shadow: 1px 1px 1px;"  class="btn btn-primary" onclick="template_modal()">Template Save</button>
 			<button class="btn btn-info export_btn" onclick="printPDF('artboard')">Convert into PDF</button>
 		</div>
 		<div class="artboard-overlay"><center><b></b><div id="artboard" ondrop="drop_handler(event);" ondragover="dragover_handler(event);"></div></center></b></div>
@@ -58,16 +65,70 @@
 			<button class="tool-items fa fa-align-left" onclick="document.execCommand('justifyLeft',false,'')"></button>
 			<button class="tool-items fa fa-align-right" onclick="document.execCommand('justifyRight',false,'')"></button>
 		</div>
-	</div>
+		<!-- The Modal -->
+		<div class="modal fade" id="myModal">
+			<div class="modal-dialog modal-md">
+				<div class="modal-content">
+				
+					<!-- Modal Header -->
+					<div class="modal-header">
+						<h4 class="modal-title">Input the template name</h4>
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+					</div>
+					
+					<!-- Modal body -->
+					<div class="modal-body">
+						<span>Template Name</span><input id="template_name" class="form-control">
+					</div>
+					
+					<!-- Modal footer -->
+					<div class="modal-footer">
+						<button type="button" class="btn btn-primary" style="box-shadow: 1px 1px 1px;" onclick="template_save()">Save</button>
+						<button type="button" class="btn btn-secondary" style="box-shadow: 1px 1px 1px;" data-dismiss="modal">Close</button>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+		</div>
 	<script>
-		// var template = ""
-		// function templage_save()
-		// {
-		// 	var template_contain = document.getElementById("artboard").innerHTML
-		// 	template = template_contain
-		// 	console.log(template_contain)
-		// }
-		// function templage_use(){
+		var template = ""
+		function template_modal(){
+			template = document.getElementById("artboard").innerHTML
+			if (template === "" ){
+				alert("the template isn't existed for saving")
+			}
+			else{
+				$("#myModal").modal()
+			}
+		}
+		function template_save()
+		{
+			let name = document.getElementById("template_name").value
+			data ={template_name:name, contain:template}
+			console.log(data)
+			$.ajax({
+				url:"./server/insert.php",
+				data:data,
+				success:function(req){
+					if(req.body = "Ok")
+					{
+						alert("New template was saved successfully")
+						$("#myModal").modal("hide")
+					}
+				}
+			});
+		}
+		$(document).ready(function(){
+			$.ajax({
+				url:"./server/get_template.php",
+				dataType:"JSON",
+				success:function(req){
+					console.log(req.body)
+				}
+			});
+		})
+		// function template_use(){
 		// 	document.getElementById("artboard").innerHTML=template
 		// }
 	</script>
