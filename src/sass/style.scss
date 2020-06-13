@@ -1,0 +1,384 @@
+// Grid
+$artboard-grid-px: 10px;
+$artboard-grid-color: rgba(0, 0, 0, .25);
+$artboard-divider-interval: 10;
+$artboard-divider-color: rgba(0, 0, 0, .5);
+$artboard-overlay-opacity: .5;
+$divider-px: $artboard-grid-px * $artboard-divider-interval;
+
+@import '../../../dist/sass/artboard';
+
+// Assets
+
+// Monitor
+$monitor-padding-px: $artboard-grid-px * 2;
+$monitor-padding: $monitor-padding-px $monitor-padding-px ($monitor-padding-px * 2) $monitor-padding-px;
+$monitor-background-color: rgb(108, 108, 108);
+$monitor-left: $divider-px - nth($monitor-padding, 4);
+$monitor-top: $divider-px - nth($monitor-padding, 1);
+
+// Screen
+$screen-background-color: #fff;
+$screen-aspect-ratio-y: 2;
+$screen-aspect-ratio-x: 3;
+$screen-width: ($divider-px * $screen-aspect-ratio-x);
+$screen-height: $screen-width * ($screen-aspect-ratio-y / $screen-aspect-ratio-x);
+$screen-left: nth($monitor-padding, 4);
+$screen-top: nth($monitor-padding, 1);
+$screen-borer-radius: 10px;
+
+// Monitor
+$monitor-height: $screen-height + nth($monitor-padding, 1) + nth($monitor-padding, 3);
+$monitor-width: $screen-width + nth($monitor-padding, 2) + nth($monitor-padding, 4);
+$monitor-border-radius: $artboard-grid-px * 3;
+
+// Window
+$window-background-color: rgb(172, 172, 172);
+// TODO: The padding needs to incorporate the toolbar here
+$window-padding: ($artboard-grid-px * 2) $artboard-grid-px $artboard-grid-px $artboard-grid-px;
+$window-height: $divider-px;
+$window-width: $divider-px;
+
+// Pane
+$pane-height: $window-height - nth($window-padding, 1) - nth($window-padding, 3);
+$pane-width: $window-width - nth($window-padding, 2) - nth($window-padding, 2);
+$pane-offset: nth($window-padding, 4);
+$pane-offset-top: nth($window-padding, 1);
+
+// Toolbar
+$toolbar-height: nth($window-padding, 1);
+$dot-size: $artboard-grid-px / 2;
+$dot-top: ($toolbar-height - $dot-size) / 2;
+$dot-offset-left: $artboard-grid-px;
+
+// Logo
+$logo-size: $artboard-grid-px * 1.5;
+$logo-bottom: (nth($monitor-padding, 3) - $logo-size) / 2;
+
+body {
+  margin: 0;
+}
+
+.monitor {
+  background-color: $monitor-background-color;
+  border-radius: $monitor-border-radius;
+  height: $monitor-height;
+  left: $monitor-left;
+  position: absolute;
+  top: $monitor-top;
+  width: $monitor-width;
+
+  .screen {
+    background-color: $screen-background-color;
+    border-radius: $screen-borer-radius;
+    height: $screen-height;
+    left: $screen-left;
+    position: absolute;
+    top: $screen-top;
+    width: $screen-width;
+  }
+
+  .logo {
+    background-color: $screen-background-color;
+    border-radius: 50%;
+    bottom: $logo-bottom;
+    height: $logo-size;
+    left: 0;
+    margin: 0 auto;
+    position: absolute;
+    right: 0;
+    width: $logo-size;
+  }
+}
+
+$resize-window-num-frames: 11;
+
+@function resize-window-step($step) {
+  @return $step / $resize-window-num-frames * 100%;
+}
+
+@keyframes resize-window {
+  #{resize-window-step(0)} {
+    height: $window-height;
+    left: 0;
+    width: $window-width;
+  }
+
+  #{resize-window-step(1)} {
+    height: $window-height;
+    left: $window-height;
+    top: 0;
+    width: $window-width;
+  }
+
+  #{resize-window-step(2)} {
+    height: $window-height;
+    left: $window-height * 2;
+    top: 0;
+    width: $window-width;
+  }
+
+  #{resize-window-step(3)} {
+    height: $window-height;
+    left: $window-height * 2;
+    top: $window-height;
+    width: $window-width;
+  }
+
+  #{resize-window-step(4)} {
+    height: $window-height;
+    left: $window-height;
+    top: $window-height;
+    width: $window-width;
+  }
+
+  #{resize-window-step(5)} {
+    height: $window-height;
+    left: 0;
+    top: $window-height;
+    width: $window-width;
+  }
+
+  #{resize-window-step(6)} {
+    height: $window-height;
+    left: 0;
+    top: 0;
+    width: $window-width;
+  }
+
+  #{resize-window-step(7)} {
+    height: $window-height * 2;
+    left: 0;
+    top: 0;
+    width: $window-width * 1.5;
+  }
+
+  #{resize-window-step(8)} {
+    height: $window-height * 2;
+    left: $window-width * 1.5;
+    top: 0;
+    width: $window-width * 1.5;
+  }
+
+  #{resize-window-step(9)} {
+    height: $window-height;
+    left: 0;
+    top: 0;
+    width: $window-width;
+  }
+
+  #{resize-window-step(10)} {
+    height: $screen-height;
+    left: 0;
+    top: 0;
+    width: $screen-width;
+  }
+
+  #{resize-window-step(11)} {
+    height: $window-height;
+    left: 0;
+    top: 0;
+    width: $window-width;
+  }
+}
+
+.window {
+
+  animation-duration: 10s;
+  animation-iteration-count: infinite;
+  animation-name: resize-window;
+  animation-timing-function: ease-in-out;
+  background-color: $window-background-color;
+  border-radius: $screen-borer-radius;
+  height: $window-height;
+  position: absolute;
+  width: $window-width;
+
+  .pane {
+    background-color: $screen-background-color;
+    bottom: $pane-offset;
+    display: inline-block;
+    left: $pane-offset;
+    position: absolute;
+    right: $pane-offset;
+    top: $pane-offset-top;
+  }
+
+  .toolbar {
+    padding-left: $pane-offset;
+
+    .dot {
+      background-color: $screen-background-color;
+      border-radius: 50%;
+      float: left;
+      height: $dot-size;
+      position: absolute;
+      top: $dot-top;
+      width: $dot-size;
+    }
+
+    .dot:nth-child(1) {
+      left: $dot-offset-left;
+    }
+
+    .dot:nth-child(2) {
+      left: $dot-offset-left * 2;
+    }
+
+    .dot:nth-child(3) {
+      left: $dot-offset-left * 3;
+    }
+  }
+}
+
+*,*::before,*::after{
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+
+html{
+  font-size: 1.1rem;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+
+}
+
+.toolbar{
+  display:grid;
+  grid-template-columns: repeat(auto-fit,minmax(20px,40px));
+  background-color: rgb(231, 231, 231);
+  color: rgb(0, 0, 0);
+  grid-gap: 1rem;
+  padding: 1rem;
+  justify-content: center;
+  align-items:center;
+}
+
+.tool-items{
+  background-color: rgb(27, 26, 26);
+   padding-top: .6rem;
+   padding-bottom:.6rem;
+  cursor: pointer;
+  color: #ffff;
+}
+.tool-items:hover{
+  box-shadow: none;
+  background-color: #6b5e5e;
+
+}
+
+
+
+.center{
+   display: flex;
+   justify-content: center;
+   flex-wrap: wrap;
+}
+
+
+.editor{
+  width:70vw;
+  height: 50vh;
+  margin: 2rem;
+  padding: 1rem;
+  font-size: 1.2rem;
+  box-shadow: 0 .1rem .4rem black;
+  border: 1px solid black;
+  overflow-y: auto;
+}
+
+.getcontent{
+  white-space: pre;
+  width: 80vw;
+  background-color: rgb(255, 255, 255);
+  overflow: auto;
+  padding: 1rem;
+  display: none;
+  margin-top: 1rem;
+  box-shadow: .1rem .1rem .5rem rgb(255, 255, 255);
+  border: 1px solid rgb(0, 0, 0);
+}
+
+
+
+.btn{
+    padding: .5rem;
+    background-color: #7e1111;
+    margin-right: 1rem;
+    color: #fffffc;
+    letter-spacing: .1rem;
+    font-size: 1rem;
+    border-radius: .2rem;
+    cursor: pointer;
+    outline: none;
+    box-shadow: 0 .4rem .4rem black;
+    transition: all .3s;
+}
+
+.btn:hover{
+    background-color: #7e1111d0;
+    box-shadow: 0 .1rem .1rem black;
+}
+
+
+
+img{
+  width: 60px;
+  height: 60px;
+  margin-top: .4rem;
+  border-radius: 50rem;
+}
+label {
+  margin-left: 0.04rem;
+  padding-left:.7rem
+}
+
+.artboard-overlay{
+  position: absolute;
+  top:10%;
+  left:13%;
+  border:1px solid black;
+  width:67.8%!important;
+  height:800px!important;
+}
+.layout{
+  position: absolute;
+  left:1%;
+  top:10%;
+  width: 11%;
+  height:800px;
+  border:1px solid black;
+}
+.title{
+  text-align: center;
+}
+.edit_section{
+  position: absolute;
+  top:10%;
+  left:83%;
+  border:1px solid black;
+  width:15.8%!important;
+  height:800px!important;
+}
+.row_layout{
+  position: absolute;
+  top:5%;
+  left:10%;
+  cursor:pointer;
+}
+.col_layout{
+  position: absolute;
+  top:18%;
+  left:27%;
+  cursor:pointer;
+}
+.line_layout{
+  position: relative;
+  top:41%;
+  left:6%;
+  cursor:pointer;
+  height:1px;
+  width:180px;
+  background-color: black;
+}

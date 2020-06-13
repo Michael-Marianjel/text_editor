@@ -1,0 +1,256 @@
+.contain_section{
+  position:absolute;
+  left:50%;
+  top:20px;
+  margin-left:-410px;
+  width:735px;
+  height:1000px;
+  border-style:none;
+}
+.export_btn{
+  position: absolute;
+  top: 94%;
+  left: 3%;
+}
+.artboard-overlay{
+  position: absolute;
+  top:3%;
+  left:35%;
+  border:1px solid black;
+  width:302px!important;
+  height: 900px;
+
+}
+#artboard{
+  border:1px solid black;
+  min-width:100%!important;
+  height:900px;
+}
+.layout{
+  position: absolute;
+  left:5%;
+  top:3%;
+  width: 200px;
+  height:900px;
+  border:1px solid black;
+}
+.title{
+  text-align: center;
+}
+.color_option{
+  width: 100%;
+  height:40px;
+  border:none;
+  border-radius: 1em;
+}
+.edit_section{
+  position: absolute;
+  top:3%;
+  left:79%;
+  border:1px solid black;
+  width:80px;
+  height:900px!important;
+}
+.row_layout{
+  position: absolute;
+  top:5%;
+  left:10%;
+  cursor:pointer;
+  font-family: 'Arial';
+  border:1px solid black;
+  width: 165px;
+  height: 80px;
+  resize:both;
+  overflow: auto;
+}
+.row_layout_section{
+  cursor:pointer;
+  border:1px solid black;
+  width: 165px;
+  height: 80px;
+  
+}
+.col_layout{
+  position: absolute;
+  top:18%;
+  left:27%;
+  cursor:pointer;
+  font-family: 'Arial';
+  border:1px solid black;
+  width: 95px;
+  height: 150px;
+  resize:both;
+  overflow: auto;
+}
+.line_layout{
+  position: relative;
+  top:41%;
+  left:6%;
+  cursor:pointer;
+  height:1px;
+  width:180px;
+  background-color: black;
+  resize:both;
+  overflow: auto;
+}
+
+*,*::before,*::after{
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+
+html{
+  font-size: 1.1rem;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+
+}
+
+.toolbar{
+  display:grid;
+  grid-template-columns: repeat(auto-fit,minmax(20px,40px));
+  background-color: rgb(231, 231, 231);
+  color: rgb(0, 0, 0);
+  grid-gap: 1rem;
+  padding: 1rem;
+  justify-content: center;
+  align-items:center;
+}
+
+.tool-items{
+  background-color: rgb(27, 26, 26);
+   padding-top: .6rem;
+   padding-bottom:.6rem;
+  cursor: pointer;
+  color: #ffff;
+}
+.tool-items:hover{
+  box-shadow: none;
+  background-color: #6b5e5e;
+
+}
+
+
+
+.center{
+   display: flex;
+   justify-content: center;
+   flex-wrap: wrap;
+}
+
+
+.editor{
+  width:70vw;
+  height: 50vh;
+  margin: 2rem;
+  padding: 1rem;
+  font-size: 1.2rem;
+  box-shadow: 0 .1rem .4rem black;
+  border: 1px solid black;
+  overflow-y: auto;
+}
+
+.getcontent{
+  white-space: pre;
+  width: 80vw;
+  background-color: rgb(255, 255, 255);
+  overflow: auto;
+  padding: 1rem;
+  display: none;
+  margin-top: 1rem;
+  box-shadow: .1rem .1rem .5rem rgb(255, 255, 255);
+  border: 1px solid rgb(0, 0, 0);
+}
+
+
+
+.btn{
+    padding: .5rem;
+    background-color: #7e1111;
+    margin-right: 1rem;
+    color: #fffffc;
+    letter-spacing: .1rem;
+    font-size: 1rem;
+    border-radius: .2rem;
+    cursor: pointer;
+    outline: none;
+    box-shadow: 0 .4rem .4rem black;
+    transition: all .3s;
+}
+
+.btn:hover{
+    background-color: #7e1111d0;
+    box-shadow: 0 .1rem .1rem black;
+}
+
+
+
+img{
+  width: 60px;
+  height: 60px;
+  margin-top: .4rem;
+  border-radius: 50rem;
+}
+label {
+  margin-left: 0.04rem;
+  padding-left:.7rem
+}
+
+
+.draggable {
+  cursor: move;
+}
+.resizable {
+  border: 1px dashed #000000;
+  position: relative;
+  min-height: 50px;
+}
+.ui-resizable-handle {
+  width: 10px;
+  height: 10px;
+  background-color: #ffffff;
+  border: 1px solid #000000;
+  position: absolute;
+}
+.ui-resizable-nw {
+  left: -5px;
+  top: -5px;
+  cursor: nw-resize;
+}
+.ui-resizable-ne {
+  top: -5px;
+  right: -5px;
+  cursor: ne-resize;
+}
+.ui-resizable-sw {
+  bottom: -5px;
+  left: -5px;
+  cursor: sw-resize;
+}
+.ui-resizable-se {
+  bottom: -5px;
+  right:-5px;
+  cursor: se-resize;
+}
+.ui-resizable-n {
+  top: -5px;
+  left:50%;
+  cursor: n-resize;
+}
+.ui-resizable-s {
+  bottom: -5px;
+  left: 50%;
+  cursor: s-resize;
+}
+.ui-resizable-w {
+  left:-5px;
+  top:calc(50% - 5px);
+  cursor: w-resize;
+}
+.ui-resizable-e {
+  right:-5px;
+  top:calc(50% - 5px);
+  cursor: e-resize;
+}
+
