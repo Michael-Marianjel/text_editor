@@ -22,6 +22,8 @@
 	<h1 class="title">Diagram Editor</h1>
 	<div class="contain_section">
 		<div class = "layout">
+			<h1 class = "layout1">1</h1>
+			<h1 class = "layout2">2</h1>
 			<div draggable ="true" id = "row_layout" class="row_layout" ondragstart="dragstart_handler(event)" ondragend="dragend_handler(event);" contenteditable></div>
 			<div draggable ="true" id = "col_layout" class="col_layout" ondragstart="dragstart_handler(event)" ondragend="dragend_handler(event);" contenteditable></div>
 			<div draggable ="true" class="line_layout" id = "line_layout" ondragstart="dragstart_handler(event)" ondragend="dragend_handler(event);"></div>
@@ -94,7 +96,7 @@
 	<script>
 		var template = ""
 		function template_modal(){
-			template = document.getElementById("artboard").innerHTML
+			template = document.getElementById("artboard").innerHTML;
 			if (template === "" ){
 				alert("the template isn't existed for saving")
 			}
@@ -106,7 +108,7 @@
 		{
 			let name = document.getElementById("template_name").value
 			data ={template_name:name, contain:template}
-			console.log(data)
+			console.log(template);
 			$.ajax({
 				url:"./server/insert.php",
 				type:"post",
@@ -139,6 +141,27 @@
 				}
 			});
 		}
+		// $('.row_layout').mousedown(function(event) {
+		// 		switch (event.which) {
+		// 				case 1:
+		// 						// alert('Left Mouse button pressed.');
+		// 						break;
+		// 				case 2:
+		// 						// alert('Middle Mouse button pressed.');
+
+		// 						break;
+		// 				case 3:
+		// 						// alert('Right Mouse button pressed.');
+		// 						var e = window.event;
+		// 						var posX = e.clientX;
+		// 						var posY = e.clientY;
+		// 						copy_paste_part = "<div style='position:abosolute:top"""'><span>Copy</span><span>Paste</span></div>";
+		// 						document.body.innerHTML = copy_paste_part
+		// 						break;
+		// 				default:
+		// 						// alert('You have a strange Mouse!');
+		// 		}
+		// });
 		// function template_use(){
 		// 	document.getElementById("artboard").innerHTML=template
 		// }

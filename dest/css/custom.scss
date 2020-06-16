@@ -7,6 +7,18 @@
   height:1000px;
   border-style:none;
 }
+.layout1{
+  position: absolute;
+  top: 4%;
+  left: 44%;
+  font-size: 75px;
+}
+.layout2{
+  position: absolute;
+  top: 20%;
+  left: 42%;
+  font-size: 75px;
+}
 .template{
   position: absolute;
   top:45%;
@@ -27,7 +39,7 @@
   border:1px solid black;
   width:302px!important;
   height: 900px;
-
+  opacity: 1!important;
 }
 #artboard{
   border:1px solid black;
