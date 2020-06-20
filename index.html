@@ -122,7 +122,14 @@
 				}
 			});
 		}
-
+		$(document).ready(function(){
+			$.ajax({
+				url:"./server/get_template.php",
+				success:function(req){
+					document.getElementById('template_list').innerHTML = req;
+				}
+			});
+		})
 		function require_template(that)
 		{
 			$.ajax({
