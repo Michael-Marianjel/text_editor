@@ -130,7 +130,17 @@
 				}
 			});
 		})
-
+		function require_template(that)
+		{
+			$.ajax({
+				url:"./server/require_template.php?id="+that.value,
+				type:'get',
+				success:function(req){
+					console.log(req)
+					document.getElementById('artboard').innerHTML = req;
+				}
+			});
+		}
 		// $('.row_layout').mousedown(function(event) {
 		// 		switch (event.which) {
 		// 				case 1:
