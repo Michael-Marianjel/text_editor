@@ -39,10 +39,14 @@ function changeSizeText(that){
 }
 
 function printPDF(divID) {
+  var oldPage = document.body.innerHTML;
+  var some_layouts = document.getElementById(divID).children;
+  console.log(some_layouts.length);
+  for(i = 0;i<some_layouts.length;i++)
+    some_layouts[i].style.border = "none"
   //Get the HTML of div
   var divElements = document.getElementById(divID).innerHTML;
   //Get the HTML of whole page
-  var oldPage = document.body.innerHTML;
 
   //Reset the page's HTML with div's HTML only
   document.body.innerHTML = 
